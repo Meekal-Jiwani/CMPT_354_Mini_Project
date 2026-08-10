@@ -3,12 +3,14 @@ import datetime
 
 DATABASE = "library.db"
 
+# Connect to the database and enable foreign key support
 def connect():
     conn = sqlite3.connect(DATABASE)
     conn.execute("PRAGMA foreign_keys = ON;")
     return conn
 
 
+# Search for items by title keyword and display their availability
 def find_item():
     keyword = input("Enter a title keyword to search for: ")
 
@@ -23,6 +25,7 @@ def find_item():
 
 
     for media_id, title, mtype, pub_date in results:
+        # Check most recent loan to see if it's out or not
         cur.execute("SELECT ReturnDate FROM Loans WHERE MediaID = ? ORDER BY CheckoutDate DESC LIMIT 1", (media_id,))
         loan = cur.fetchone()
         status = "Available"
@@ -33,15 +36,18 @@ def find_item():
 
     conn.close()
 
+
+# Borrow an item if the customer has no outstanding balance and the item is available
 def borrow_item():
     customer_id = input("Enter your Customer ID: ")
     media_id = input("Enter the Media ID you want to borrow: ")
     checkout_date = str(datetime.date.today())
-    due_date = str(datetime.date.today() + datetime.timedelta(days=14))
+    due_date = str(datetime.date.today() + datetime.timedelta(days=14))  # 2 week loan period
 
     conn = connect()
     cur = conn.cursor()
 
+    # Check customer and item are valid before doing anything
     cur.execute("SELECT Balance FROM Customers WHERE CustomerID = ?", (customer_id,))
     balance = cur.fetchone()
     cur.execute("SELECT 1 FROM Media WHERE MediaID = ?", (media_id,))
@@ -70,6 +76,7 @@ def borrow_item():
     conn.close()
 
 
+# Return an item if the customer has an active loan for it
 def return_item():
     customer_id = input("Enter your Customer ID: ")
     media_id = input("Enter the Media ID you're returning: ")
@@ -77,6 +84,7 @@ def return_item():
     conn = connect()
     cur = conn.cursor()
 
+    # Need the checkout date since it's part of the primary key
     cur.execute("SELECT CheckoutDate FROM Loans WHERE MediaID = ? AND CustomerID = ? AND ReturnDate IS NULL",
                 (media_id, customer_id))
     row = cur.fetchone()
@@ -95,10 +103,11 @@ def return_item():
     print("Item returned. Thanks!")
 
 
+# Donate an item, which will be reviewed for addition to the collection
 def donate_item():
     title = input("Title of the item you're donating: ")
     mtype = input("Type (Print Book/Online Book/Magazine/Scientific Journal/Record): ")
-    pub_date = input("Publication date (YYYY-MM-DD, leave blank if unknown): ") or None
+    pub_date = input("Publication date (YYYY-MM-DD, leave blank if unknown): ") or None  # blank becomes NULL
     customer_id = input("Your Customer ID: ")
 
     conn = connect()
@@ -118,6 +127,8 @@ def donate_item():
         
     conn.close()
 
+
+# Find upcoming events by name keyword
 def find_event():
     keyword = input("Enter an event name keyword (or leave blank for all upcoming events): ")
 
@@ -138,6 +149,7 @@ def find_event():
         print("[" + str(event_id) + "] " + name + " - " + audience + " - " + edate + " " + start + "-" + end)
 
 
+# Register a customer for an event if they haven't already signed up
 def register_for_event():
     customer_id = input("Enter your Customer ID: ")
     event_id = input("Enter the Event ID: ")
@@ -145,6 +157,7 @@ def register_for_event():
     conn = connect()
     cur = conn.cursor()
 
+    # Make sure both IDs exist and they're not already signed up
     cur.execute("SELECT 1 FROM Customers WHERE CustomerID = ?", (customer_id,))
     customer_exists = cur.fetchone()
     cur.execute("SELECT 1 FROM Events WHERE EventID = ?", (event_id,))
@@ -169,6 +182,7 @@ def register_for_event():
     conn.close()
 
 
+# Volunteer a customer for the library if they haven't already signed up
 def volunteer():
     customer_id = input("Enter your Customer ID: ")
     availability = input("What's your availability (e.g. Weekday evenings)? ")
@@ -194,6 +208,8 @@ def volunteer():
 
     conn.close()
 
+
+# Ask for help from a librarian if the customer exists
 def ask_for_help():
     customer_id = input("Enter your Customer ID: ")
     message = input("What do you need help with? ")
@@ -218,6 +234,7 @@ def ask_for_help():
 def main():
     print("Welcome to the Library!")
 
+    # main menu loop, keeps going until they pick exit
     while True:
         print("1. Find an item")
         print("2. Borrow an item")
