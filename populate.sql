@@ -195,3 +195,4 @@ INSERT INTO HelpRequests (CustomerID, Message, RequestDate, Resolved) VALUES
 (13, 'Trouble logging into the online catalog.', '2026-07-13', 0),
 (14, 'Asking about study room availability.', '2026-07-14', 1),
 (15, 'Need help with the self-checkout kiosk.', '2026-07-15', 0);
+

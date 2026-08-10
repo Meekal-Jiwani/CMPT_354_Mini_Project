@@ -123,6 +123,7 @@ CREATE TABLE HelpRequests (
 );
 
 
+-- can't borrow if you still owe money
 CREATE TRIGGER trg_check_balance_before_borrow
 BEFORE INSERT ON Loans
 FOR EACH ROW
@@ -132,6 +133,7 @@ BEGIN
 END;
 
 
+-- stops the same item being checked out twice
 CREATE TRIGGER trg_no_double_loan
 BEFORE INSERT ON Loans
 FOR EACH ROW
@@ -143,6 +145,7 @@ BEGIN
 END;
 
 
+-- adds a $5 fine when something comes back late
 CREATE TRIGGER trg_apply_late_fine
 AFTER UPDATE OF ReturnDate ON Loans
 FOR EACH ROW
@@ -154,6 +157,7 @@ BEGIN
 END;
 
 
+-- no booking a room that's already got an event that day
 CREATE TRIGGER trg_no_booking_during_event
 BEFORE INSERT ON Bookings
 FOR EACH ROW
