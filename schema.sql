@@ -101,24 +101,15 @@ CREATE TABLE Employees (
     Position TEXT NOT NULL,
     PhoneNum TEXT,
     DOB DATE,
-    DateHired DATE
+    DateHired DATE DEFAULT CURRENT_DATE
 );
-
-
-CREATE TABLE Volunteers (
-    CustomerID INTEGER PRIMARY KEY,
-    Availability TEXT,
-    SignupDate DATE DEFAULT CURRENT_DATE,
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
-);
-
 
 CREATE TABLE HelpRequests (
-    RequestID INTEGER PRIMARY KEY AUTOINCREMENT,
     CustomerID INTEGER NOT NULL,
-    Message TEXT NOT NULL,
-    RequestDate DATE DEFAULT CURRENT_DATE,
-    Resolved INTEGER NOT NULL DEFAULT 0,
+    Request TEXT NOT NULL,
+    RequestTimestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Response TEXT,
+    PRIMARY KEY(CustomerID, RequestTimestamp),
     FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
 );
 
