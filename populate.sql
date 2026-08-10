@@ -164,15 +164,11 @@ INSERT INTO Employees (Email, FirstName, LastName, Position, PhoneNum, DOB, Date
 
 INSERT INTO Volunteers (CustomerID, Availability, SignupDate) VALUES
 (1, 'Weekday evenings', '2026-06-01'),
-(2, 'Weekends', '2026-06-02'),
 (4, 'Weekday mornings', '2026-06-03'),
-(5, 'Weekends', '2026-06-04'),
 (6, 'Weekday afternoons', '2026-06-05'),
 (7, 'Flexible', '2026-06-06'),
-(8, 'Weekday evenings', '2026-06-07'),
 (9, 'Weekends', '2026-06-08'),
-(10, 'Weekday afternoons', '2026-06-09'),
-(3, 'Flexible', '2026-06-10');
+(10, 'Weekday afternoons', '2026-06-09');
 
 INSERT INTO Volunteers (CustomerID, Availability, SignupDate) VALUES
 (11, 'Weekends', '2026-06-11'),
