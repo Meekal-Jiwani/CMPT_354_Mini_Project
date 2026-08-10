@@ -1,7 +1,10 @@
 INSERT INTO Authors (AuthorName) VALUES
 ('George Orwell'), ('Harper Lee'), ('Isaac Asimov'), ('Agatha Christie'),
-('Toni Morrison'), ('J.R.R. Tolkien'), ('Yuval Noah Harari'), ('Chimamanda Ngozi Adichie'),
+('Toni Morrison'), ('J.R.R. Tolkien'), ('Bill Bryson'), ('Neil Gaiman'),
 ('Andy Weir'), ('Margaret Atwood');
+
+INSERT INTO Authors (AuthorName) VALUES
+('James Patterson'), ('Ann Patchett'), ('Colleen Hoover'), ('Brandon Sanderson'), ('Liane Moriarty');
 
 INSERT INTO Media (Title, Type, PublicationDate) VALUES
 ('1984', 'Print Book', '1949-06-08'),
@@ -14,14 +17,24 @@ INSERT INTO Media (Title, Type, PublicationDate) VALUES
 ('Half of a Yellow Sun', 'Print Book', '2006-08-01'),
 ('Project Hail Mary', 'Online Book', '2021-05-04'),
 ('The Handmaid''s Tale', 'Print Book', '1985-08-01'),
-('National Geographic - August 2026', 'Magazine', '2026-08-01'),
-('Journal of Computer Science Research', 'Scientific Journal', '2026-06-15'),
+('National Geographic Magazine', 'Magazine', '2026-08-01'),
+('Computer Science Journal', 'Scientific Journal', '2026-06-15'),
 ('Kind of Blue', 'Record', '1959-08-17');
+
+INSERT INTO Media (Title, Type, PublicationDate) VALUES
+('Along Came a Spider', 'Print Book', '1993-01-01'),
+('Commonwealth', 'Print Book', '2016-09-13'),
+('It Ends with Us', 'Print Book', '2016-08-02'),
+('Mistborn', 'Print Book', '2006-07-17'),
+('Big Little Lies', 'Print Book', '2014-07-29');
 
 INSERT INTO MediaAuthors (MediaID, AuthorID) VALUES
 (1, 1), (2, 2), (3, 3), (4, 4), (5, 5),
 (6, 6), (7, 7), (8, 8), (9, 9), (10, 10),
 (3, 9);
+
+INSERT INTO MediaAuthors (MediaID, AuthorID) VALUES
+(14, 11), (15, 12), (16, 13), (17, 14), (18, 15);
 
 INSERT INTO CandidateMedia (Title, Type, PublicationDate, DonatedBy) VALUES
 ('Dune', 'Print Book', '1965-08-01', 1),
@@ -35,6 +48,13 @@ INSERT INTO CandidateMedia (Title, Type, PublicationDate, DonatedBy) VALUES
 ('Abbey Road', 'Record', '1969-09-26', 5),
 ('Circe', 'Print Book', '2018-04-10', NULL);
 
+INSERT INTO CandidateMedia (Title, Type, PublicationDate, DonatedBy) VALUES
+('Neverwhere', 'Print Book', '1996-09-16', 6),
+('Coraline', 'Print Book', '2002-07-02', NULL),
+('Ready Player One', 'Print Book', '2011-08-16', 7),
+('The Night Circus', 'Print Book', '2011-09-13', NULL),
+('Verity', 'Print Book', '2018-10-02', 9);
+
 INSERT INTO Customers (FirstName, LastName, DOB, Balance) VALUES
 ('Jon', 'Doe', '2003-02-14', 0),
 ('Ayesha', 'Khan', '1998-11-02', 0),
@@ -46,6 +66,13 @@ INSERT INTO Customers (FirstName, LastName, DOB, Balance) VALUES
 ('Zara', 'Ahmed', '2001-01-27', 10.00),
 ('Noah', 'Kim', '1997-06-11', 0),
 ('Amara', 'Okafor', '2004-04-05', 0);
+
+INSERT INTO Customers (FirstName, LastName, DOB, Balance) VALUES
+('Alex', 'Wong', '1996-08-10', 0),
+('Maya', 'Patel', '2000-02-02', 0),
+('Chris', 'Lee', '1993-05-05', 0),
+('Jordan', 'Smith', '1998-12-01', 0),
+('Taylor', 'Brooks', '2001-03-15', 0);
 
 INSERT INTO Loans (MediaID, CheckoutDate, CustomerID, DueDate, ReturnDate) VALUES
 (1, '2026-07-01', 1, '2026-07-15', '2026-07-14'),
@@ -59,9 +86,19 @@ INSERT INTO Loans (MediaID, CheckoutDate, CustomerID, DueDate, ReturnDate) VALUE
 (9, '2026-07-09', 1, '2026-07-23', '2026-07-23'),
 (10, '2026-07-10', 4, '2026-07-24', NULL);
 
+INSERT INTO Loans (MediaID, CheckoutDate, CustomerID, DueDate, ReturnDate) VALUES
+(14, '2026-07-11', 2, '2026-07-25', NULL),
+(15, '2026-07-12', 4, '2026-07-26', '2026-07-24'),
+(16, '2026-07-13', 5, '2026-07-27', NULL),
+(17, '2026-07-14', 6, '2026-07-28', '2026-07-30'),
+(18, '2026-07-15', 9, '2026-07-29', NULL);
+
 INSERT INTO Rooms (RoomNumber, Capacity) VALUES
 (101, 20), (102, 15), (103, 30), (104, 10), (105, 50),
 (106, 25), (107, 12), (108, 40), (109, 18), (110, 8);
+
+INSERT INTO Rooms (RoomNumber, Capacity) VALUES
+(111, 22), (112, 35), (113, 14), (114, 45), (115, 16);
 
 INSERT INTO Bookings (CustomerID, BookingDate, RoomNumber, StartTime, EndTime) VALUES
 (1, '2026-08-01', 104, '10:00', '11:00'),
@@ -75,6 +112,13 @@ INSERT INTO Bookings (CustomerID, BookingDate, RoomNumber, StartTime, EndTime) V
 (9, '2026-08-09', 102, '09:30', '10:30'),
 (10, '2026-08-10', 109, '13:30', '14:30');
 
+INSERT INTO Bookings (CustomerID, BookingDate, RoomNumber, StartTime, EndTime) VALUES
+(11, '2026-08-22', 111, '09:00', '10:00'),
+(12, '2026-08-23', 112, '11:00', '12:00'),
+(13, '2026-08-24', 113, '13:00', '14:00'),
+(14, '2026-08-25', 114, '15:00', '16:00'),
+(15, '2026-08-26', 115, '10:00', '11:00');
+
 INSERT INTO Events (EventName, Audience, RoomNumber, EventDate, StartTime, EndTime) VALUES
 ('Picture Book Storytime', 'Kids', 101, '2026-08-12', '10:00', '11:00'),
 ('Teen Manga Club', 'Teens', 103, '2026-08-13', '15:00', '16:30'),
@@ -87,9 +131,19 @@ INSERT INTO Events (EventName, Audience, RoomNumber, EventDate, StartTime, EndTi
 ('Teen Volunteer Orientation', 'Teens', 106, '2026-08-20', '16:00', '17:00'),
 ('Genealogy Workshop', 'Seniors', 106, '2026-08-21', '14:00', '15:30');
 
+INSERT INTO Events (EventName, Audience, RoomNumber, EventDate, StartTime, EndTime) VALUES
+('Poetry Night', 'Adults', 111, '2026-08-27', '18:00', '19:30'),
+('Kids Puppet Show', 'Kids', 112, '2026-08-28', '10:00', '11:00'),
+('Teen Trivia Night', 'Teens', 113, '2026-08-29', '16:00', '17:30'),
+('Senior Chess Club', 'Seniors', 114, '2026-08-30', '13:00', '15:00'),
+('Community Potluck', 'General', 115, '2026-08-31', '17:00', '19:00');
+
 INSERT INTO EventRegistration (EventID, CustomerID) VALUES
 (1, 6), (2, 8), (3, 1), (4, 5), (5, 2),
 (6, 4), (7, 9), (8, 3), (9, 10), (10, 7);
+
+INSERT INTO EventRegistration (EventID, CustomerID) VALUES
+(11, 11), (12, 12), (13, 13), (14, 14), (15, 15);
 
 INSERT INTO Employees (Email, FirstName, LastName, Position, PhoneNum, DOB, DateHired) VALUES
 ('j.wilson@library.org', 'James', 'Wilson', 'Head Librarian', '604-555-0101', '1980-04-12', '2010-06-01'),
@@ -103,6 +157,11 @@ INSERT INTO Employees (Email, FirstName, LastName, Position, PhoneNum, DOB, Date
 ('e.robinson@library.org', 'Emily', 'Robinson', 'Volunteer Coordinator', '604-555-0109', '1990-10-09', '2017-07-19'),
 ('b.osei@library.org', 'Ben', 'Osei', 'Security', '604-555-0110', '1987-03-21', '2012-11-30');
 
+INSERT INTO Employees (Email, FirstName, LastName, Position, PhoneNum, DOB, DateHired) VALUES
+('l.chen@library.org', 'Lily', 'Chen', 'Librarian', '604-555-0111', '1991-04-18', '2019-10-01'),
+('m.davis@library.org', 'Mark', 'Davis', 'Circulation Assistant', '604-555-0112', '1995-09-09', '2021-11-15'),
+('p.wong@library.org', 'Paul', 'Wong', 'IT Support', '604-555-0113', '1989-06-06', '2014-03-20');
+
 INSERT INTO Volunteers (CustomerID, Availability, SignupDate) VALUES
 (1, 'Weekday evenings', '2026-06-01'),
 (2, 'Weekends', '2026-06-02'),
@@ -114,6 +173,13 @@ INSERT INTO Volunteers (CustomerID, Availability, SignupDate) VALUES
 (9, 'Weekends', '2026-06-08'),
 (10, 'Weekday afternoons', '2026-06-09'),
 (3, 'Flexible', '2026-06-10');
+
+INSERT INTO Volunteers (CustomerID, Availability, SignupDate) VALUES
+(11, 'Weekends', '2026-06-11'),
+(12, 'Weekday mornings', '2026-06-12'),
+(13, 'Flexible', '2026-06-13'),
+(14, 'Weekday evenings', '2026-06-14'),
+(15, 'Weekends', '2026-06-15');
 
 INSERT INTO HelpRequests (CustomerID, Message, RequestDate, Resolved) VALUES
 (1, 'Need help finding books on machine learning.', '2026-07-01', 1),
@@ -127,3 +193,9 @@ INSERT INTO HelpRequests (CustomerID, Message, RequestDate, Resolved) VALUES
 (9, 'Need a printout of my event registration.', '2026-07-09', 0),
 (10, 'Question about volunteering hours logged.', '2026-07-10', 1);
 
+INSERT INTO HelpRequests (CustomerID, Message, RequestDate, Resolved) VALUES
+(11, 'Need help finding the periodicals section.', '2026-07-11', 0),
+(12, 'Question about donating old textbooks.', '2026-07-12', 1),
+(13, 'Trouble logging into the online catalog.', '2026-07-13', 0),
+(14, 'Asking about study room availability.', '2026-07-14', 1),
+(15, 'Need help with the self-checkout kiosk.', '2026-07-15', 0);
